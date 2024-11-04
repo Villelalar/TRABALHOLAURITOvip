@@ -115,6 +115,8 @@ int main(void) {
         printf("Nenhuma venda encontrada para o comprador %s. \n", procurado);
       }
       
+      printf("\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:");
+      scanf(" %c", &resposta);
       break;
     case 3:
       // ==PROCURA GERAL==
@@ -150,6 +152,9 @@ int main(void) {
           printf("aaaa");
         } 
       }
+      
+      printf("\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:");
+      scanf(" %c", &resposta);
       break;
     case 4:
       resposta = 'N';
