@@ -3,6 +3,7 @@
 #include <string.h>
 
 //testezinho
+//testezinho 2
 struct Cliente {
   char nome[16];
   char sexo;
