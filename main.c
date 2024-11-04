@@ -146,14 +146,16 @@ int main(void) {
           printf("aaaa")
         } 
       }
-
-    break;
+      break;
     case 4:
       resposta = 'N';
       break;
+  }
+  
   } while (resposta == 'S' || resposta == 's');
 
   return 0;
+
 }
 
 int validarSexo(char sexo) {
