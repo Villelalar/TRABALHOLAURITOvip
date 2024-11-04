@@ -115,18 +115,37 @@ int main(void) {
       break;
     case 3:
     // PROCURA GERAL
+    // valor acima do pedido pelo user
       float valorDesjd;
       for (int i = 0; i < total_vendas; i++){
         printf("Valor a achar compras maiores que : \n")
         scanf("%f", &valorDesjd)
-        if (strcmp(vendas[i].cliente.nome, procurado) == 0){
+        if(vendas[i].valorTotal > valorDesjd){
+          contador++;
+        }
+      }
+      printf("== nQuantidade de vendas de valor maior que %f: %i ==\n\n",  valorDesjd, contador);
+      contador = 0;
 
+      //maiores que 2 itens
+      for (int i = 0; i < total_vendas; i++){
+        if(vendas[i].numItens = 2){
+          contador++;
+        }
+      }
+      printf("== Quantidade de vendas com 2 itens: %i ==\n", contador);
+      contador = 0;
+      
+      //pesquisa nomes
+      for (int i = 0; i < total_vendas; i++){
+        if (strcmp(vendas[i].cliente.nome, procurado) == 0){
+          printf("aaaa")
         } 
+      }
       break;
     case 4:
       resposta = 'N';
       break;
-    }
   } while (resposta == 'S' || resposta == 's');
 
   return 0;
