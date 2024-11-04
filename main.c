@@ -11,7 +11,8 @@ struct Cliente {
 struct Venda {
   struct Cliente cliente;
   int numItens;
-  char horario[5];
+  int horas;
+  int minutos;
   float valorTotal;
 };
 
@@ -20,6 +21,7 @@ struct Venda {
 int validarSexo(char sexo);
 int validarNome(char *nome);
 int validarNum(int num);
+int validarHorario(int hora, int minuto);
 void cadastrarVendas(struct Venda *vendas, int quantidade);
 
 int main(void) {
@@ -100,7 +102,7 @@ int main(void) {
           printf("Sexo: %c\n", vendas[i].cliente.sexo);
           printf("Idade: %d\n", vendas[i].cliente.idade);
           printf("Número de itens: %d\n", vendas[i].numItens);
-          printf("Horário: %s\n", vendas[i].horario);
+          printf("Horário: %s:%s\n", vendas[i].horas, vendas[i].minutos);
           printf("Valor total: %.2f\n\n", vendas[i].valorTotal);
           contadorP += vendas[i].valorTotal;
         } 
@@ -136,7 +138,8 @@ int main(void) {
       }
       printf("== Quantidade de vendas com 2 itens: %i ==\n", contador);
       contador = 0;
-      
+      // após medio dia
+
       //pesquisa nomes
       for (int i = 0; i < total_vendas; i++){
         if (strcmp(vendas[i].cliente.nome, procurado) == 0){
@@ -165,6 +168,17 @@ int validarNome(char *nome) {
 int validarNum(int num) {
   return (num > 0);
 };
+
+int validarHorario(int hora, int minuto){
+  int validado = 0;
+  if (hora <= 24 && hora >= 0){
+    validado ++;
+  }
+  if( minuto <= 60 && minuto >= 0){
+  validado ++;
+  }
+  return(validado = 2);
+}
 
 void cadastrarVendas(struct Venda *vendas, int quantidade) {
   
@@ -210,9 +224,17 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       }
       
       // HORÁRIO
-      printf("Horário da compra (HH:MM, formato 24h): \n");
-      scanf("%s", vendas[i].horario);
-  
+      printf("=Horário da compra (24h)= \n");
+      printf("Horas: \n");
+      scanf("%i", &vendas[i].horas);
+      printf("Minutos: \n");
+      scanf("%i", &vendas[i].minutos);
+    if(!validarHorario(vendas[i].horas, vendas[i].minutos)){
+        printf("Erro: Horário precisa respeitar o modelo 24 horas. \n");
+        i--;
+        continue;
+    }
+
       // VALOR TOTAL 
       printf("Valor total da compra (em R$): \n");
       scanf("%f", &vendas[i].valorTotal);
