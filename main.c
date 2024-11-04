@@ -83,6 +83,7 @@ int main(void) {
       for (int i = 0; i < total_vendas; i++){
         if (strcmp(vendas[i].cliente.nome, procurado) == 0){
           contador++;
+        }
       }
       if (contador > 0){
         printf("%i compras vendas em nome de %s\n", contador, procurado);
@@ -114,8 +115,8 @@ int main(void) {
       
       break;
     case 3:
-    // PROCURA GERAL
-    // valor acima do pedido pelo user
+      // ==PROCURA GERAL==
+      // valor acima do pedido pelo user
       float valorDesjd;
       for (int i = 0; i < total_vendas; i++){
         printf("Valor a achar compras maiores que : \n")
@@ -142,7 +143,8 @@ int main(void) {
           printf("aaaa")
         } 
       }
-      break;
+
+    break;
     case 4:
       resposta = 'N';
       break;
