@@ -119,10 +119,14 @@ int main(void) {
     case 3:
       // ==PROCURA GERAL==
       // valor acima do pedido pelo user
+      printf("== Pesquisa Geral de Compras == \n\n");
+      
+      //variaveis usadas somente aqui
       float valorDesjd;
+
       for (int i = 0; i < total_vendas; i++){
-        printf("Valor a achar compras maiores que : \n")
-        scanf("%f", &valorDesjd)
+        printf("Valor a achar compras maiores que : \n");
+        scanf("%f", &valorDesjd);
         if(vendas[i].valorTotal > valorDesjd){
           contador++;
         }
@@ -143,7 +147,7 @@ int main(void) {
       //pesquisa nomes
       for (int i = 0; i < total_vendas; i++){
         if (strcmp(vendas[i].cliente.nome, procurado) == 0){
-          printf("aaaa")
+          printf("aaaa");
         } 
       }
       break;
