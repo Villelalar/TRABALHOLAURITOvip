@@ -123,15 +123,15 @@ int main(void) {
       
       //variaveis usadas somente aqui
       float valorDesjd;
-
+      
+      printf("Valor a achar compras maiores que : \n");
+      scanf("%f", &valorDesjd);
       for (int i = 0; i < total_vendas; i++){
-        printf("Valor a achar compras maiores que : \n");
-        scanf("%f", &valorDesjd);
         if(vendas[i].valorTotal > valorDesjd){
           contador++;
         }
       }
-      printf("== nQuantidade de vendas de valor maior que %f: %i ==\n\n",  valorDesjd, contador);
+      printf("== Quantidade de vendas de valor maior que %f: %i ==\n\n",  valorDesjd, contador);
       contador = 0;
 
       //maiores que 2 itens
@@ -180,10 +180,10 @@ int validarHorario(int hora, int minuto){
   if (hora <= 24 && hora >= 0){
     validado ++;
   }
-  if( minuto <= 60 && minuto >= 0){
+  if( minuto < 60 && minuto >= 0){
   validado ++;
   }
-  return(validado = 2);
+  return(validado == 2);
 }
 
 void cadastrarVendas(struct Venda *vendas, int quantidade) {
@@ -235,6 +235,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       scanf("%i", &vendas[i].horas);
       printf("Minutos: \n");
       scanf("%i", &vendas[i].minutos);
+
     if(!validarHorario(vendas[i].horas, vendas[i].minutos)){
         printf("Erro: Horário precisa respeitar o modelo 24 horas. \n");
         i--;
