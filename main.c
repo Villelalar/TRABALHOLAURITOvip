@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-//resolver tudo
 struct Cliente {
   char nome[16];
   char sexo;
