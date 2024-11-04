@@ -10,9 +10,9 @@ struct Cliente {
 
 struct Venda {
   struct Cliente cliente;
-  int num_itens;
+  int numItens;
   char horario[5];
-  float valor_total;
+  float valorTotal;
 };
 
 
@@ -77,7 +77,18 @@ int main(void) {
       float media = 0;
       int contadorC = 0;
       float contadorP = 0;
+      int contador = 0;
       
+            
+      for (int i = 0; i < total_vendas; i++){
+        if (strcmp(vendas[i].cliente.nome, procurado) == 0){
+          contador++;
+      }
+      if (contador > 0){
+        printf("%i compras vendas em nome de %s\n", contador, procurado);
+      }
+      
+
       for (int i = 0; i < total_vendas; i++){
         if (strcmp(vendas[i].cliente.nome, procurado) == 0){
           printf("Venda encontrada!\n\n");
@@ -87,10 +98,10 @@ int main(void) {
           printf("Nome do comprador: %s\n", vendas[i].cliente.nome);
           printf("Sexo: %c\n", vendas[i].cliente.sexo);
           printf("Idade: %d\n", vendas[i].cliente.idade);
-          printf("Número de itens: %d\n", vendas[i].num_itens);
+          printf("Número de itens: %d\n", vendas[i].numItens);
           printf("Horário: %s\n", vendas[i].horario);
-          printf("Valor total: %.2f\n\n", vendas[i].valor_total);
-          contadorP += vendas[i].valor_total;
+          printf("Valor total: %.2f\n\n", vendas[i].valorTotal);
+          contadorP += vendas[i].valorTotal;
         } 
       }
       
@@ -103,7 +114,14 @@ int main(void) {
       
       break;
     case 3:
+    // PROCURA GERAL
+      float valorDesjd;
+      for (int i = 0; i < total_vendas; i++){
+        printf("Valor a achar compras maiores que : \n")
+        scanf("%f", &valorDesjd)
+        if (strcmp(vendas[i].cliente.nome, procurado) == 0){
 
+        } 
       break;
     case 4:
       resposta = 'N';
@@ -162,9 +180,9 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       }
 
       printf("quantidade de itens: \n");
-      scanf("%d", &vendas[i].num_itens);
+      scanf("%d", &vendas[i].numItens);
       
-      if(!validarNum(vendas[i].num_itens)){
+      if(!validarNum(vendas[i].numItens)){
         printf("Erro: Quantidade precisa ser no mínimo 1. \n");
         i--;
         continue;
@@ -176,7 +194,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
   
       // VALOR TOTAL 
       printf("Valor total da compra (em R$): \n");
-      scanf("%f", &vendas[i].valor_total);
+      scanf("%f", &vendas[i].valorTotal);
       
       // CONFIRMA FINALIZAÇÃO
       printf("Venda %d cadastrada com sucesso!\n", i+1);
