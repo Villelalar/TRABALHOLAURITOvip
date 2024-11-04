@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//testezinho
 struct Cliente {
   char nome[16];
   char sexo;
