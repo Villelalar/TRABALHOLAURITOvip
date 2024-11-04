@@ -125,10 +125,9 @@ int main(void) {
       
       //variaveis usadas somente aqui
       float valorDesjd;
-
-      for (int i = 0; i < total_vendas; i++){
-        printf("Valor a achar compras maiores que : \n");
+    printf("Valor a achar compras maiores que : \n");
         scanf("%f", &valorDesjd);
+      for (int i = 0; i < total_vendas; i++){
         if(vendas[i].valorTotal > valorDesjd){
           contador++;
         }
