@@ -150,6 +150,8 @@ int main(void) {
           printf("aaaa");
         } 
       }
+      printf("\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:");
+      scanf(" %c", &resposta);
       break;
     case 4:
       resposta = 'N';
