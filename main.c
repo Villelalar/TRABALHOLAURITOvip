@@ -23,6 +23,7 @@ int validarNome(char *nome);
 int validarNum(int num);
 int validarHorario(int hora, int minuto);
 void cadastrarVendas(struct Venda *vendas, int quantidade);
+void printarVenda(struct Venda *vendas, int i);
 
 int main(void) {
 
@@ -88,7 +89,7 @@ int main(void) {
         }
       }
       if (contador > 0){
-        printf("%i compras vendas em nome de %s\n", contador, procurado);
+        printf("%i casos de vendas em nome de %s\n", contador, procurado);
       }
       
 
@@ -96,14 +97,7 @@ int main(void) {
         if (strcmp(vendas[i].cliente.nome, procurado) == 0){
           printf("Venda encontrada!\n\n");
           contadorC++;
-          
-          printf("== Venda #%d ==\n\n", i + 1);
-          printf("Nome do comprador: %s\n", vendas[i].cliente.nome);
-          printf("Sexo: %c\n", vendas[i].cliente.sexo);
-          printf("Idade: %d\n", vendas[i].cliente.idade);
-          printf("Número de itens: %d\n", vendas[i].numItens);
-          printf("Horário: %s:%s\n", vendas[i].horas, vendas[i].minutos);
-          printf("Valor total: %.2f\n\n", vendas[i].valorTotal);
+          printarVenda(vendas, i);
           contadorP += vendas[i].valorTotal;
         } 
       }
@@ -123,7 +117,8 @@ int main(void) {
       
       //variaveis usadas somente aqui
       float valorDesjd;
-      
+      contador = 0;
+
       printf("Valor a achar compras maiores que : \n");
       scanf("%f", &valorDesjd);
       for (int i = 0; i < total_vendas; i++){
@@ -131,7 +126,7 @@ int main(void) {
           contador++;
         }
       }
-      printf("== Quantidade de vendas de valor maior que %f: %i ==\n\n",  valorDesjd, contador);
+      printf("== Quantidade de vendas de valor maior que %2.f: %i ==\n\n",  valorDesjd, contador);
       contador = 0;
 
       //maiores que 2 itens
@@ -140,16 +135,101 @@ int main(void) {
           contador++;
         }
       }
-      printf("== Quantidade de vendas com 2 itens: %i ==\n", contador);
+      printf("== Quantidade de VENDAS com 2 itens: %i ==\n", contador);
       contador = 0;
       // após medio dia
-
-      //pesquisa nomes
       for (int i = 0; i < total_vendas; i++){
-        if (strcmp(vendas[i].cliente.nome, procurado) == 0){
-          printf("aaaa");
+        if(vendas[i].horas > 12){
+          contador++;
+        }
+      }
+      printf("== Quantidade de VENDAS após meio dia: %i ==\n", contador);
+      contador = 0;
+
+      //pesquisa numero de mulheres
+      for (int i = 0; i < total_vendas; i++){
+        if (vendas[i].cliente.sexo == 'f'){
+          contador++;
         } 
       }
+      printf("== Quantidade de CLIENTES mulheres: %i ==\n", contador);
+      contador = 0;
+
+      //pesquisa total de preço dos homens
+      for (int i = 0; i < total_vendas; i++){
+        if (vendas[i].cliente.sexo == 'f'){
+          contador += vendas[i].valorTotal;
+        } 
+      }
+      printf("== Quantidade de DINHEIRO gasto pelos homens: %i ==\n", contador);
+      contador = 0;
+
+      //pesquisa total de itens vendidos
+      for (int i = 0; i < total_vendas; i++){
+        if (vendas[i].numItens >= 1){
+          contador += vendas[i].numItens;
+        } 
+      }
+      printf("== Quantidade de ITENS vendidos: %i ==\n", contador);
+      contador = 0;
+
+      //pesquisa valor somado de todas as vendas
+      for (int i = 0; i < total_vendas; i++){
+        if (vendas[i].valorTotal >= 1){
+          contador += vendas[i].valorTotal;
+        } 
+      }
+      printf("== Valor total das compras: %i ==\n", contador);
+      //aproveita o total e faz o calculo da media usando ja o total descoberto
+      contador = contador / total_vendas;
+      printf("== Valor MÉDIO das compras: %i ==\n", contador);
+      contador = 0; 
+
+      //pesquisa total da compra mais cara
+      float maior = 0;
+      for (int i = 0; i < total_vendas; i++){
+        if (vendas[i].valorTotal > maior){
+          maior = vendas[i].valorTotal;
+        } 
+      }
+      printf("== Maior compra: %i ==\n", contador);
+      contador = 0;
+
+      //pesquisa pelo cliente com menor nome
+      char menorNome[16];
+      strcpy(menorNome, vendas[0].cliente.nome); //inicia com o menor nome, copia e poe na variavel
+
+      for (int i = 0; i < total_vendas; i++){
+        if (strcmp(vendas[i].cliente.nome, menorNome) < 0) { //retorna neg caso menor
+          strcpy(menorNome, vendas[i].cliente.nome); //copia o nome
+        }
+      }
+      printf("== Compra(s) feita por: %i (menor nome)==\n", menorNome);
+
+      for (int i = 0; i < total_vendas; i++){
+        if (strcmp(vendas[i].cliente.nome, menorNome) == 0){
+          printf("== Venda #%d ==\n\n", i + 1);
+          printarVenda(vendas, i); 
+        } 
+      }
+
+      //mais velho, usando a mesma variavel pra facilitar minha vida!!!!!!
+      //nao tem problema pq esses loops se zeram toda vez após iterados
+      maior = 0;
+      for (int i = 0; i < total_vendas; i++){
+        if (vendas[i].cliente.idade > maior){
+          maior = vendas[i].cliente.idade;
+          strcpy(menorNome, vendas[i].cliente.nome); //copia o nome, estou usando o mesmo pois facilita
+        } 
+      }
+      printf("== Compra(s) feita por: %i (maior idade)==\n", menorNome);
+      for (int i = 0; i < total_vendas; i++){
+        if (strcmp(vendas[i].cliente.nome, menorNome) == 0){
+          printarVenda(vendas, i);
+        } 
+      }
+
+
       printf("\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:");
       scanf(" %c", &resposta);
       break;
@@ -252,4 +332,14 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       printf("Venda %d cadastrada com sucesso!\n", i+1);
     
     }
+}
+
+void printarVenda(struct Venda *vendas, int i){
+          printf("== Venda #%d ==\n\n", i + 1);
+          printf("Nome do comprador: %s\n", vendas[i].cliente.nome);
+          printf("Sexo: %c\n", vendas[i].cliente.sexo);
+          printf("Idade: %d\n", vendas[i].cliente.idade);
+          printf("Número de itens: %d\n", vendas[i].numItens);
+          printf("Horário: %s:%s\n", vendas[i].horas, vendas[i].minutos);
+          printf("Valor total: %.2f\n\n", vendas[i].valorTotal);
 }
