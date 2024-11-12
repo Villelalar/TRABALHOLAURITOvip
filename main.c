@@ -18,6 +18,7 @@ struct Venda {
 
 
 // FUNÇÃO
+
 int validarSexo(char sexo);
 int validarNome(char *nome);
 int validarNum(int num);
@@ -35,6 +36,7 @@ int main(void) {
   int total_vendas = 0;
 
   vendas = (struct Venda *)malloc(sizeof(struct Venda) * 0); // Alocação inicial
+  
   // MENU ESTRUTURA //
   do {
     do {
@@ -67,7 +69,7 @@ int main(void) {
           return 1;
       }
       cadastrarVendas(vendas, quantidade);
-     
+
       printf("\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:");
       scanf(" %c", &resposta);
 
@@ -263,9 +265,54 @@ int validarHorario(int hora, int minuto){
     validado ++;
   }
   if( minuto < 60 && minuto >= 0){
-  validado ++;
+    validado ++;
   }
   return(validado == 2);
+}
+
+// Função para carregar vendas do arquivo
+//usa dois * pq tem realloc la dentro (cristo) então rpecisamos alterar o proprio "vendas"
+void carregarVendas(struct Venda **vendas, int *total_vendas) {
+
+FILE *arquivo = fopen("registro.txt", "r");
+//se nao existee, para tudo ! tudo bem ate aquii
+if (arquivo == NULL) {
+    printf("Erro ao abrir o arquivo.\n");
+}
+
+// temp que armazena cada iteração do loop
+struct Venda venda_temp;
+//loop que acessa as linhas :D
+do {
+    int resultado = fscanf(arquivo, "Nome: %15[^\n]\nSexo: %c\nIdade: %d\nNúmero de Itens: %d\nHoras: %d\nMinutos: %d\nValor Total: %f\n\n",
+                           venda_temp.cliente.nome,
+                           &venda_temp.cliente.sexo,
+                           &venda_temp.cliente.idade,
+                           &venda_temp.numItens,
+                           &venda_temp.horas,
+                           &venda_temp.minutos,
+                           &venda_temp.valorTotal);
+    // EOF == end of file, ele para quando nao tem mais porra nenhuma
+    if (resultado == EOF) {
+        break;
+    }
+
+    // realloc tipo la em cima no total de vendas, aumenta 1 a cada iteração
+    *vendas = realloc(*vendas, (*total_vendas + 1) * sizeof(struct Venda));
+    if (*vendas == NULL) {
+        printf("Erro ao alocar memória #004 !\n");
+        fclose(arquivo);
+    }
+
+    // *vendas é nosso array de vendas normal, sem ser ponteiro, ele propriamente dito
+    // *total_vendas é o [i] da venda_temp dentro do array normal
+    //quando atribuimos assim, estamos falando pra ele adicionar os elementos lidos no vetor verdadeiro usado na main
+    (*vendas)[*total_vendas] = venda_temp;
+    (*total_vendas)++; // Incrementa o contador total de vendas
+
+} while (1);
+  fclose(arquivo);
+  printf("Vendas carregadas com sucesso!\n");
 }
 
 void cadastrarVendas(struct Venda *vendas, int quantidade) {
@@ -328,6 +375,40 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       printf("Valor total da compra (em R$): \n");
       scanf("%f", &vendas[i].valorTotal);
       
+
+      //  código que escreve tudo bonitao uhuuu 
+
+      FILE *arquivo;
+      arquivo = fopen("registro.txt", "r"); //teste
+
+      if (arquivo == NULL) {
+          // se o arquivo não existir, cria e escreve 
+          arquivo = fopen("registro.txt", "w");
+          if (arquivo == NULL) {
+              printf("Erro ao criar o arquivo!\n");
+              return;
+          }
+      } else {
+          // se ja existe, só adiciona 
+          fclose(arquivo);  // Fecha o arquivo aberto em leitura
+          arquivo = fopen("registro.txt", "a");
+          if (arquivo == NULL) {
+              printf("Erro ao abrir o arquivo para append!\n");
+              return;
+          }
+      }
+
+      fprintf(arquivo, "Nome: %s\nSexo: %c\nIdade: %d\nNúmero de Itens: %d\nHoras: %d\nMinutos: %d\nValor Total: %.2f\n\n", 
+              vendas[i].cliente.nome, 
+              vendas[i].cliente.sexo,
+              vendas[i].cliente.idade, 
+              vendas[i].numItens,
+              vendas[i].horas,
+              vendas[i].minutos,
+              vendas[i].valorTotal);
+
+      fclose(arquivo);
+      
       // CONFIRMA FINALIZAÇÃO
       printf("Venda %d cadastrada com sucesso!\n", i+1);
     
@@ -343,3 +424,4 @@ void printarVenda(struct Venda *vendas, int i){
           printf("Horário: %s:%s\n", vendas[i].horas, vendas[i].minutos);
           printf("Valor total: %.2f\n\n", vendas[i].valorTotal);
 }
+
