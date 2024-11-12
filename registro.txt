@@ -1,0 +1,16 @@
+Nome: Villela
+Sexo: f
+Idade: 18
+Número de Itens: 3
+Horas: 23
+Minutos: 34
+Valor Total: 44.00
+
+Nome: Giovanna
+Sexo: f
+Idade: 19
+Número de Itens: 5
+Horas: 24
+Minutos: 0
+Valor Total: 9.00
+

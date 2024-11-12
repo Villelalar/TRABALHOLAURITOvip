@@ -25,6 +25,7 @@ int validarNum(int num);
 int validarHorario(int hora, int minuto);
 void cadastrarVendas(struct Venda *vendas, int quantidade);
 void printarVenda(struct Venda *vendas, int i);
+void carregarVendas(struct Venda **vendas, int *total_vendas);
 
 int main(void) {
 
@@ -35,8 +36,9 @@ int main(void) {
   struct Venda *vendas = NULL;
   int total_vendas = 0;
 
-  vendas = (struct Venda *)malloc(sizeof(struct Venda) * 0); // Alocação inicial
-  
+  vendas = (struct Venda *)malloc(sizeof(struct Venda) * 0); // alocação inicial
+  carregarVendas(&vendas, &total_vendas);  //carrega as compras
+
   // MENU ESTRUTURA //
   do {
     do {
@@ -383,6 +385,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
 
       if (arquivo == NULL) {
           // se o arquivo não existir, cria e escreve 
+          //como nao existe nao precisa fechar
           arquivo = fopen("registro.txt", "w");
           if (arquivo == NULL) {
               printf("Erro ao criar o arquivo!\n");
@@ -390,7 +393,8 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
           }
       } else {
           // se ja existe, só adiciona 
-          fclose(arquivo);  // Fecha o arquivo aberto em leitura
+          //precisa fechar modo leitura pq ja existe ent abrir dnv em append
+          fclose(arquivo);  
           arquivo = fopen("registro.txt", "a");
           if (arquivo == NULL) {
               printf("Erro ao abrir o arquivo para append!\n");
