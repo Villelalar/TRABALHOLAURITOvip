@@ -161,7 +161,7 @@ int main(void) {
 
       //pesquisa total de preço dos homens
       for (int i = 0; i < total_vendas; i++){
-        if (vendas[i].cliente.sexo == 'f'){
+        if (vendas[i].cliente.sexo == 'm'){
           contador += vendas[i].valorTotal;
         } 
       }
@@ -226,7 +226,7 @@ int main(void) {
           strcpy(menorNome, vendas[i].cliente.nome); //copia o nome, estou usando o mesmo pois facilita
         } 
       }
-      printf("== Compra(s) feita por: %i (maior idade)==\n", menorNome);
+      printf("== Compra(s) feita por: %s (maior idade)==\n", menorNome);
       for (int i = 0; i < total_vendas; i++){
         if (strcmp(vendas[i].cliente.nome, menorNome) == 0){
           printarVenda(vendas, i);
@@ -273,18 +273,20 @@ int validarHorario(int hora, int minuto){
 }
 
 // Função para carregar vendas do arquivo
-//usa dois * pq tem realloc la dentro (cristo) então rpecisamos alterar o proprio "vendas"
+//não soubemos fazer direito, então baseamos 90% em pesquisa e usamos gpt pra preencher oq não entendemos
+// usa dois * pq tem realloc la dentro (cristo) então rpecisamos alterar o proprio "vendas"
 void carregarVendas(struct Venda **vendas, int *total_vendas) {
 
 FILE *arquivo = fopen("registro.txt", "r");
-//se nao existee, para tudo ! tudo bem ate aquii
+//se nao existee, para tudo. tudo bem ate aquiiii
 if (arquivo == NULL) {
     printf("Erro ao abrir o arquivo.\n");
 }
 
 // temp que armazena cada iteração do loop
 struct Venda venda_temp;
-//loop que acessa as linhas :D
+
+//loop que acessa as linhas :D, até q consegui fazer isso rs
 do {
     int resultado = fscanf(arquivo, "Nome: %15[^\n]\nSexo: %c\nIdade: %d\nNúmero de Itens: %d\nHoras: %d\nMinutos: %d\nValor Total: %f\n\n",
                            venda_temp.cliente.nome,
@@ -300,6 +302,7 @@ do {
     }
 
     // realloc tipo la em cima no total de vendas, aumenta 1 a cada iteração
+    // ele n acessa o ponteiro acessa o vendas de verdade e vai aumentando
     *vendas = realloc(*vendas, (*total_vendas + 1) * sizeof(struct Venda));
     if (*vendas == NULL) {
         printf("Erro ao alocar memória #004 !\n");
@@ -308,7 +311,7 @@ do {
 
     // *vendas é nosso array de vendas normal, sem ser ponteiro, ele propriamente dito
     // *total_vendas é o [i] da venda_temp dentro do array normal
-    //quando atribuimos assim, estamos falando pra ele adicionar os elementos lidos no vetor verdadeiro usado na main
+    // quando atribuimos assim, estamos falando pra ele adicionar os elementos lidos no vetor verdadeiro usado na main
     (*vendas)[*total_vendas] = venda_temp;
     (*total_vendas)++; // Incrementa o contador total de vendas
 
@@ -379,13 +382,13 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       
 
       //  código que escreve tudo bonitao uhuuu 
-
+      //  abre nosso arquivo
       FILE *arquivo;
       arquivo = fopen("registro.txt", "r"); //teste
 
       if (arquivo == NULL) {
           // se o arquivo não existir, cria e escreve 
-          //como nao existe nao precisa fechar
+          // como nao existe nao precisa fechar !!
           arquivo = fopen("registro.txt", "w");
           if (arquivo == NULL) {
               printf("Erro ao criar o arquivo!\n");
@@ -397,10 +400,11 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
           fclose(arquivo);  
           arquivo = fopen("registro.txt", "a");
           if (arquivo == NULL) {
-              printf("Erro ao abrir o arquivo para append!\n");
+              printf("Erro ao abrir o arquivo para adicionar informações!\n");
               return;
           }
       }
+      // MESMO MODELO da leitura, literalmente identico, pq se não dá um erro ao ler
 
       fprintf(arquivo, "Nome: %s\nSexo: %c\nIdade: %d\nNúmero de Itens: %d\nHoras: %d\nMinutos: %d\nValor Total: %.2f\n\n", 
               vendas[i].cliente.nome, 
