@@ -208,7 +208,7 @@ int main(void) {
           strcpy(menorNome, vendas[i].cliente.nome); //copia o nome
         }
       }
-      printf("== Compra(s) feita por: %i (menor nome)==\n", menorNome);
+      printf("== Compra(s) feita por: %s (menor nome)==\n", menorNome);
 
       for (int i = 0; i < total_vendas; i++){
         if (strcmp(vendas[i].cliente.nome, menorNome) == 0){
