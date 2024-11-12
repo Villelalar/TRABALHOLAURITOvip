@@ -425,7 +425,7 @@ void printarVenda(struct Venda *vendas, int i){
           printf("Sexo: %c\n", vendas[i].cliente.sexo);
           printf("Idade: %d\n", vendas[i].cliente.idade);
           printf("Número de itens: %d\n", vendas[i].numItens);
-          printf("Horário: %s:%s\n", vendas[i].horas, vendas[i].minutos);
+          printf("Horário: %d:%d\n", vendas[i].horas, vendas[i].minutos);
           printf("Valor total: %.2f\n\n", vendas[i].valorTotal);
 }
 
