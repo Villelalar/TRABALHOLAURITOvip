@@ -146,7 +146,7 @@ int main(void) {
 
       //maiores que 2 itens
       for (int i = 0; i < total_vendas; i++){
-        if(vendas[i].numItens = 2){
+        if(vendas[i].numItens == 2){
           contador++;
         }
       }
@@ -207,7 +207,7 @@ int main(void) {
           maior = vendas[i].valorTotal;
         } 
       }
-      printf("== Maior compra: %i ==\n", contador);
+      printf("== Maior compra: %i ==\n", maior);
       contador = 0;
 
       //pesquisa pelo cliente com menor nome
