@@ -289,7 +289,7 @@ void carregarVendas(struct Venda **vendas, int *total_vendas) {
 FILE *arquivo = fopen("registro.txt", "r");
 //se nao existee, para tudo. tudo bem ate aquiiii
 if (arquivo == NULL) {
-    printf("Erro ao abrir o arquivo.\n");
+    printf(ANSI_COLOR_RED "Erro ao abrir o arquivo.\n" ANSI_COLOR_RESET);
 }
 
 // temp que armazena cada iteração do loop
@@ -314,7 +314,7 @@ do {
     // ele n acessa o ponteiro acessa o vendas de verdade e vai aumentando
     *vendas = realloc(*vendas, (*total_vendas + 1) * sizeof(struct Venda));
     if (*vendas == NULL) {
-        printf("Erro ao alocar memória #004 !\n");
+        printf(ANSI_COLOR_RED "Erro ao alocar memória #004 !\n" ANSI_COLOR_RESET);
         fclose(arquivo);
     }
 
@@ -326,7 +326,7 @@ do {
 
 } while (1);
   fclose(arquivo);
-  printf("Vendas carregadas com sucesso!\n");
+  printf(ANSI_COLOR_MAGENTA "Vendas carregadas com sucesso!\n" ANSI_COLOR_RESET);
 }
 
 void cadastrarVendas(struct Venda *vendas, int quantidade) {
@@ -338,7 +338,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       scanf("%s", vendas[i].cliente.nome);
 
       if(!validarNome(vendas[i].cliente.nome)){
-        printf("Erro: Nome inválido. Deve ter entre 4 e 16 caracteres.\n");
+        printf(ANSI_COLOR_RED "Erro: Nome inválido. Deve ter entre 4 e 16 caracteres.\n" ANSI_COLOR_RESET);
         i--;
         continue;
       }
@@ -348,7 +348,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       scanf(" %c", &vendas[i].cliente.sexo);
 
       if(!validarSexo(vendas[i].cliente.sexo)){
-        printf("Erro: Sexo inválido. \n");
+        printf(ANSI_COLOR_RED "Erro: Sexo inválido. \n" ANSI_COLOR_RESET);
         i--;
         continue;
       }
@@ -358,7 +358,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       scanf("%d", &vendas[i].cliente.idade);
       
       if(!validarNum(vendas[i].cliente.idade)){
-        printf("Erro: Idade inválida. \n");
+        printf(ANSI_COLOR_RED "Erro: Idade inválida. \n" ANSI_COLOR_RESET);
         i--;
         continue;
       }
@@ -367,7 +367,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       scanf("%d", &vendas[i].numItens);
       
       if(!validarNum(vendas[i].numItens)){
-        printf("Erro: Quantidade precisa ser no mínimo 1. \n");
+        printf(ANSI_COLOR_RED "Erro: Quantidade precisa ser no mínimo 1. \n" ANSI_COLOR_RESET);
         i--;
         continue;
       }
@@ -380,7 +380,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       scanf("%i", &vendas[i].minutos);
 
     if(!validarHorario(vendas[i].horas, vendas[i].minutos)){
-        printf("Erro: Horário precisa respeitar o modelo 24 horas. \n");
+        printf(ANSI_COLOR_RED "Erro: Horário precisa respeitar o modelo 24 horas. \n" ANSI_COLOR_RESET);
         i--;
         continue;
     }
@@ -400,7 +400,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
           // como nao existe nao precisa fechar !!
           arquivo = fopen("registro.txt", "w");
           if (arquivo == NULL) {
-              printf("Erro ao criar o arquivo!\n");
+              printf(AMSI_COLOR_RED "Erro ao criar o arquivo!\n" ANSI_COLOR_RESET);
               return;
           }
       } else {
@@ -409,7 +409,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
           fclose(arquivo);  
           arquivo = fopen("registro.txt", "a");
           if (arquivo == NULL) {
-              printf("Erro ao abrir o arquivo para adicionar informações!\n");
+              printf(ANSI_COLOR_RED "Erro ao abrir o arquivo para adicionar informações!\n" ANSI_COLOR_RESET);
               return;
           }
       }
@@ -427,7 +427,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
       fclose(arquivo);
       
       // CONFIRMA FINALIZAÇÃO
-      printf("Venda %d cadastrada com sucesso!\n", i+1);
+      printf(ANSI_COLOR_MAGENTA "Venda %d cadastrada com sucesso!\n" ANSI_COLOR_RESET, i+1);
     
     }
 }
