@@ -51,7 +51,7 @@ int main(void) {
   // MENU ESTRUTURA //
   do {
     do {
-      printf("\n//  MENU  //\n\n");
+      printf(ANSI_COLOR_CYAN "\n//  MENU  //\n\n" ANSI_COLOR_RESET);
       printf("1- Cadastrar venda\n2- informações de venda "
              "específica\n3- informação de todas as vendas\n4- encerrar "
              "programa\n\nEscolha: ");
@@ -126,7 +126,7 @@ int main(void) {
     case 3:
       // ==PROCURA GERAL==
       // valor acima do pedido pelo user
-      printf("== Pesquisa Geral de Compras == \n\n");
+      printf(ANSI_COLOR_CYAN "== Pesquisa Geral de Compras == \n\n" ANSI_COLOR_RESET);
       
       //variaveis usadas somente aqui
       float valorDesjd;
