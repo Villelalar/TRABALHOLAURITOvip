@@ -325,7 +325,6 @@ do {
     // quando atribuimos assim, estamos falando pra ele adicionar os elementos lidos no vetor verdadeiro usado na main
     (*vendas)[*total_vendas] = venda_temp;
     (*total_vendas)++; // Incrementa o contador total de vendas
-
 } while (1);
   fclose(arquivo);
   printf(ANSI_COLOR_MAGENTA "Vendas carregadas com sucesso!\n" ANSI_COLOR_RESET);
