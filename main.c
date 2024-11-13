@@ -273,7 +273,7 @@ int validarHorario(int hora, int minuto){
 }
 
 // Função para carregar vendas do arquivo
-//não soubemos fazer direito, então baseamos 90% em pesquisa e usamos gpt pra preencher oq não entendemos
+//não soubemos fazer direito, então baseamos 99% em pesquisa
 // usa dois * pq tem realloc la dentro (cristo) então rpecisamos alterar o proprio "vendas"
 void carregarVendas(struct Venda **vendas, int *total_vendas) {
 
