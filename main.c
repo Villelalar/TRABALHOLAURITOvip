@@ -48,7 +48,7 @@ int main(void) {
   vendas = (struct Venda *)malloc(sizeof(struct Venda) * 0); // alocação inicial
   carregarVendas(&vendas, &total_vendas);  //carrega as compras
 
-  // MENU ESTRUTURA //
+  // 4 ESTRUTURA //
   do {
     do {
       printf(ANSI_COLOR_CYAN "\n//  MENU  //\n\n" ANSI_COLOR_RESET);
@@ -81,7 +81,7 @@ int main(void) {
       }
       cadastrarVendas(vendas, quantidade);
 
-      printf("\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:");
+      printf(ANSI_COLOR_MAGENTA "\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:" ANSI_COLOR_RESET);
       scanf(" %c", &resposta);
 
       break;
@@ -121,6 +121,8 @@ int main(void) {
       } else {
         printf(ANSI_COLOR_BLUE "Nenhuma venda encontrada para o comprador %s.  \n"ANSI_COLOR_RESET, procurado);
       }
+      printf(ANSI_COLOR_MAGENTA "\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:" ANSI_COLOR_RESET);
+      scanf(" %c", &resposta);
       
       break;
     case 3:
@@ -243,7 +245,7 @@ int main(void) {
       }
 
 
-      printf("\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:");
+      printf(ANSI_COLOR_MAGENTA "\nDeseja voltar ao menu?\nS- sim\nN- não\n\nR:" ANSI_COLOR_RESET);
       scanf(" %c", &resposta);
       break;
     case 4:
