@@ -76,7 +76,7 @@ int main(void) {
       
       vendas = realloc(vendas, (total_vendas + quantidade) * sizeof(struct Venda));
       if (vendas == NULL) {
-          printf("Erro ao alocar memória.\n");
+          printf(ANSI_COLOR_RED "Erro ao alocar memória.\n" ANSI_COLOR_RESET);
           return 1;
       }
       cadastrarVendas(vendas, quantidade);
@@ -119,7 +119,7 @@ int main(void) {
         media = contadorP / contadorC;
         printf("Média de valores das compras de %s: %.2f\n", procurado, media);
       } else {
-        printf("Nenhuma venda encontrada para o comprador %s. \n", procurado);
+        printf(ANSI_COLOR_BLUE "Nenhuma venda encontrada para o comprador %s.  \n"ANSI_COLOR_RESET, procurado);
       }
       
       break;
