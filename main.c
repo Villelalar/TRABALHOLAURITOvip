@@ -2,6 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+// cores 
+#define ANSI_COLOR_RED     "\x1b[31m" 
+#define ANSI_COLOR_GREEN   "\x1b[32m" 
+#define ANSI_COLOR_YELLOW  "\x1b[33m" 
+#define ANSI_COLOR_BLUE    "\x1b[34m" 
+#define ANSI_COLOR_MAGENTA "\x1b[35m" 
+#define ANSI_COLOR_CYAN    "\x1b[36m" 
+#define ANSI_COLOR_RESET   "\x1b[0m" 
+ 
 struct Cliente {
   char nome[16];
   char sexo;
@@ -49,7 +58,7 @@ int main(void) {
       scanf("%d", &operador);
 
       if (operador > 4 || operador < 1) {
-        printf("ERRO 1# \n");
+        printf(ANSI_COLOR_RED "ERRO 1# \n" ANSI_COLOR_RESET);
       } else {
         printf("...");
       }
@@ -273,7 +282,7 @@ int validarHorario(int hora, int minuto){
 }
 
 // Função para carregar vendas do arquivo
-//não soubemos fazer direito, então baseamos 99% em pesquisa
+//não soubemos fazer direito, então baseamos 99% em pesquisa sobre o arquivo
 // usa dois * pq tem realloc la dentro (cristo) então rpecisamos alterar o proprio "vendas"
 void carregarVendas(struct Venda **vendas, int *total_vendas) {
 
