@@ -400,7 +400,7 @@ void cadastrarVendas(struct Venda *vendas, int quantidade) {
           // como nao existe nao precisa fechar !!
           arquivo = fopen("registro.txt", "w");
           if (arquivo == NULL) {
-              printf(AMSI_COLOR_RED "Erro ao criar o arquivo!\n" ANSI_COLOR_RESET);
+              printf(ANSI_COLOR_RED "Erro ao criar o arquivo!\n" ANSI_COLOR_RESET);
               return;
           }
       } else {
